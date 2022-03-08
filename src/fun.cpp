@@ -23,7 +23,24 @@ unsigned int faStr1(const char *str) {
 }
 
 unsigned int faStr2(const char *str) {
-    return 0;
+    bool inWordWithCapitalFirstLetter = false; //флаг ("находимся внутри слова с одной (первой) заглавной буквой")
+	unsigned int result = 0; //количество слов с первой заглавной буквой
+	int i;
+
+	for (i = 0; i < strlen(str); i++) {
+		if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithCapitalFirstLetter) { //вышли из очередного слова с первой заглавной буквой
+			result++;
+			inWordWithCapitalFirstLetter = false;
+		}
+		else if (!inWordWithCapitalFirstLetter && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) { //вошли в слово
+			inWordWithCapitalFirstLetter = true;
+		}
+		else if (inWordWithCapitalFirstLetter && !islower(str[i])) { //в слове наткнулись на вторую заглавную букву
+			inWordWithCapitalFirstLetter = false;
+		}
+	}
+
+	return result;
 }
 
 unsigned int faStr3(const char *str) {
