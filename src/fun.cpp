@@ -1,12 +1,13 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
+#include <cctype>
 
 unsigned int faStr1(const char *str) {
     bool inWordWithoutNumbers = false; //флаг ("находимся внутри слова без цифр")
-	unsigned int result = 0; //количество слов без цифр в строке
-	int i;
+    unsigned int result = 0; //количество слов без цифр в строке
+    int i;
 
-	for (i = 0; i < strlen(str); i++) {
+    for (i = 0; i < strlen(str); i++) {
 		if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithoutNumbers) { //вышли из очередного слова без цифры
 			result++;
 			inWordWithoutNumbers = false;
@@ -44,5 +45,28 @@ unsigned int faStr2(const char *str) {
 }
 
 unsigned int faStr3(const char *str) {
-    return 0;
+    bool inWord = false; //флаг ("находимся внутри слова")
+	unsigned int summaryWordsLength = 0; //количество букв в сумме (у всех слов)
+	unsigned int thisWordLength = 0; //количество букв в текущем слове
+	unsigned int wordCounter = 0; //счетчик слов
+	int i;
+
+	for (i = 0; i < strlen(str); i++) {
+		if ((str[i] == ' ' || i == strlen(str) - 1) && inWord) { //вышли из слова
+			if (str[i] != ' ') thisWordLength++;
+			summaryWordsLength = summaryWordsLength + thisWordLength;
+			thisWordLength = 0;
+			inWord = false;
+		}
+		else if (!inWord && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) { //вошли в слово
+			inWord = true;
+			wordCounter++;
+			thisWordLength++;
+		}
+		else if (inWord) { //находимся в слове
+			thisWordLength++;
+		}
+	}
+
+	return summaryWordsLength / wordCounter;
 }
