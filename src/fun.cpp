@@ -4,19 +4,19 @@
 #include <cstring>
 
 unsigned int faStr1(const char *str) {
-    bool inWordWithoutNumbers = false; //флаг ("находимся внутри слова без цифр")
-    unsigned int result = 0; //количество слов без цифр в строке
+    bool inWordWithoutNumbers = false;
+    unsigned int result = 0;
     int i;
 
     for (i = 0; i < strlen(str); i++) {
-        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithoutNumbers) { //вышли из очередного слова без цифры
+        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithoutNumbers) {
                 result = result + 1;
                 inWordWithoutNumbers = false;
         }
-        else if (!inWordWithoutNumbers && str[i] != ' ' && !isdigit(str[i]) && (i == 0 || str[i - 1] == ' ')) { //вошли в слово
+        else if (!inWordWithoutNumbers && str[i] != ' ' && !isdigit(str[i]) && (i == 0 || str[i - 1] == ' ')) {
                 inWordWithoutNumbers = true;
         }
-        else if (inWordWithoutNumbers && isdigit(str[i])) { //в слове наткнулись на цифру
+        else if (inWordWithoutNumbers && isdigit(str[i])) {
                 inWordWithoutNumbers = false;
         }
     }
@@ -25,19 +25,19 @@ unsigned int faStr1(const char *str) {
 }
 
 unsigned int faStr2(const char *str) {
-    bool inWordWithCapitalFirstLetter = false; //флаг ("находимся внутри слова с одной (первой) заглавной буквой")
-    unsigned int result = 0; //количество слов с первой заглавной буквой
+    bool inWordWithCapitalFirstLetter = false;
+    unsigned int result = 0;
     int i;
 
     for (i = 0; i < strlen(str); i++) {
-        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithCapitalFirstLetter) { //вышли из очередного слова с первой заглавной буквой
+        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithCapitalFirstLetter) {
                 result = result + 1;
                 inWordWithCapitalFirstLetter = false;
         }
-        else if (!inWordWithCapitalFirstLetter && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) { //вошли в слово
+        else if (!inWordWithCapitalFirstLetter && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
                 inWordWithCapitalFirstLetter = true;
         }
-        else if (inWordWithCapitalFirstLetter && !islower(str[i])) { //в слове наткнулись на вторую заглавную букву
+        else if (inWordWithCapitalFirstLetter && !islower(str[i])) {
                 inWordWithCapitalFirstLetter = false;
         }
     }
@@ -46,14 +46,14 @@ unsigned int faStr2(const char *str) {
 }
 
 unsigned int faStr3(const char *str) {
-    bool inWord = false; //флаг ("находимся внутри слова")
-    unsigned int summaryWordsLength = 0; //количество букв в сумме (у всех слов)
-    unsigned int thisWordLength = 0; //количество букв в текущем слове
-    unsigned int wordCounter = 0; //счетчик слов
+    bool inWord = false;
+    unsigned int summaryWordsLength = 0;
+    unsigned int thisWordLength = 0;
+    unsigned int wordCounter = 0;
     int i;
 
     for (i = 0; i < strlen(str); i++) {
-        if ((str[i] == ' ' || i == strlen(str) - 1) && inWord) { //вышли из слова
+        if ((str[i] == ' ' || i == strlen(str) - 1) && inWord) {
                 if (str[i] != ' ') {
                         thisWordLength = thisWordLength + 1;
                 }
@@ -61,7 +61,7 @@ unsigned int faStr3(const char *str) {
                 thisWordLength = 0;
                 inWord = false;
         }
-        else if (!inWord && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) { //вошли в слово
+        else if (!inWord && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
                 inWord = true;
                 wordCounter = wordCounter + 1;
                 thisWordLength = thisWordLength + 1;
