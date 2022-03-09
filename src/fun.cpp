@@ -1,6 +1,7 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
 #include <cctype>
+#include <cstring>
 
 unsigned int faStr1(const char *str) {
     bool inWordWithoutNumbers = false; //флаг ("находимся внутри слова без цифр")
