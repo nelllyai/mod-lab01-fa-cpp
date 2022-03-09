@@ -4,20 +4,20 @@
 #include <cstring>
 
 unsigned int faStr1(const char *str) {
-    bool inWordWithoutNumbers = false;
+    bool inWordNoNum = false;
     unsigned int result = 0;
     int i;
 
     for (i = 0; i < strlen(str); i++) {
-        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithoutNumbers) {
+        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordNoNum) {
                 result = result + 1;
-                inWordWithoutNumbers = false;
+                inWordNoNum = false;
         }
-        else if (!inWordWithoutNumbers && str[i] != ' ' && !isdigit(str[i]) && (i == 0 || str[i - 1] == ' ')) {
-                inWordWithoutNumbers = true;
+        else if (!inWordNoNum && str[i] != ' ' && !isdigit(str[i]) && (i == 0 || str[i - 1] == ' ')) {
+                inWordNoNum = true;
         }
-        else if (inWordWithoutNumbers && isdigit(str[i])) {
-                inWordWithoutNumbers = false;
+        else if (inWordNoNum && isdigit(str[i])) {
+                inWordNoNum = false;
         }
     }
 
@@ -25,20 +25,20 @@ unsigned int faStr1(const char *str) {
 }
 
 unsigned int faStr2(const char *str) {
-    bool inWordWithCapitalFirstLetter = false;
+    bool inWordCapital = false;
     unsigned int result = 0;
     int i;
 
     for (i = 0; i < strlen(str); i++) {
-        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordWithCapitalFirstLetter) {
+        if ((str[i] == ' ' || i == strlen(str) - 1) && inWordCapital) {
                 result = result + 1;
-                inWordWithCapitalFirstLetter = false;
+                inWordCapital = false;
         }
-        else if (!inWordWithCapitalFirstLetter && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
-                inWordWithCapitalFirstLetter = true;
+        else if (!inWordCapital && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
+                inWordCapital = true;
         }
-        else if (inWordWithCapitalFirstLetter && !islower(str[i])) {
-                inWordWithCapitalFirstLetter = false;
+        else if (inWordCapital && !islower(str[i])) {
+                inWordCapital = false;
         }
     }
 
@@ -66,7 +66,7 @@ unsigned int faStr3(const char *str) {
                 wordCounter = wordCounter + 1;
                 thisWordLength = thisWordLength + 1;
         }
-        else if (inWord) { //находимся в слове
+        else if (inWord) {
                 thisWordLength = thisWordLength + 1;
         }
     }
