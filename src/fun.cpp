@@ -10,10 +10,12 @@ unsigned int faStr1(const char *str) {
 
     for (i = 0; i < strlen(str); i++) {
         if ((str[i] == ' ' || i == strlen(str) - 1) && inWordNoNum) {
-                result = result + 1;
+                result++;
                 inWordNoNum = false;
-        } else if (!inWordNoNum && str[i] != ' ' && !isdigit(str[i]) && (i == 0 || str[i - 1] == ' ')) {
+        } else if (!inWordNoNum && str[i] != ' ' && !isdigit(str[i])) {
+            if (i == 0 || str[i - 1] == ' ') {
                 inWordNoNum = true;
+            }
         } else if (inWordNoNum && isdigit(str[i])) {
                 inWordNoNum = false;
         }
@@ -29,10 +31,12 @@ unsigned int faStr2(const char *str) {
 
     for (i = 0; i < strlen(str); i++) {
         if ((str[i] == ' ' || i == strlen(str) - 1) && inWordCapital) {
-                result = result + 1;
+                result++;
                 inWordCapital = false;
-        } else if (!inWordCapital && !islower(str[i]) && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
+        } else if (!inWordCapital && !islower(str[i]) && str[i] != ' ') {
+            if (i == 0 || str[i - 1] == ' ') {
                 inWordCapital = true;
+            }
         } else if (inWordCapital && !islower(str[i])) {
                 inWordCapital = false;
         }
@@ -51,17 +55,17 @@ unsigned int faStr3(const char *str) {
     for (i = 0; i < strlen(str); i++) {
         if ((str[i] == ' ' || i == strlen(str) - 1) && inWord) {
                 if (str[i] != ' ') {
-                        thisWordLength = thisWordLength + 1;
+                        thisWordLength++;
                 }
                 summaryWordsLength = summaryWordsLength + thisWordLength;
                 thisWordLength = 0;
                 inWord = false;
         } else if (!inWord && str[i] != ' ' && (i == 0 || str[i - 1] == ' ')) {
                 inWord = true;
-                wordCounter = wordCounter + 1;
-                thisWordLength = thisWordLength + 1;
+                wordCounter++;
+                thisWordLength++;
         } else if (inWord) {
-                thisWordLength = thisWordLength + 1;
+                thisWordLength++;
         }
     }
 
